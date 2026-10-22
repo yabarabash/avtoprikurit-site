@@ -82,7 +82,7 @@ window.SITE = {
   priceRows: [
     { name: "Помощь на дороге", price: "Узнать цену" },
     { name: "Запуск двигателя", price: "Узнать цену" },
-    { name: "Мобильная заправка", price: "Узнать цену" },
+    { name: "Диагностика ошибок", price: "Узнать цену" },
     { name: "Вскрытие автомобиля", price: "Узнать цену" },
     { name: "Разблокировка автомобиля", price: "Узнать цену" },
     { name: "Ремонт авто", price: "Узнать цену" }
@@ -94,6 +94,10 @@ window.SITE = {
     { src: "img/ford.jpg",   caption: "Ford: проверка двигателя" },
     { src: "img/battery.jpg", caption: "Аккумулятор и генератор" },
     { src: "img/brake.jpg",  caption: "Тормозные диски и суппорты" },
+    { src: "img/wheel-red.jpg", caption: "Меняю колесо прямо на трассе" },
+    { src: "img/wheel-tools.jpg", caption: "Домкрат, ключи и снятое колесо" },
+    { src: "img/battery-close.jpg", caption: "Аккумулятор: проверка и замена" },
+    { src: "img/spark.jpg",  caption: "Диагностика двигателя по свечам" },
     { src: "img/night.jpg",  caption: "Работа в темноте" }
   ],
 

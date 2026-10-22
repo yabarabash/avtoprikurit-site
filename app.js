@@ -138,7 +138,8 @@
     var card = el('article', 'top-card');
     var fig = el('figure');
     var img = el('img');
-    img.src = t.photo; img.alt = t.title; img.decoding = 'async';
+    img.src = t.photo; img.alt = t.title; img.decoding = 'async'; img.loading = 'lazy';
+    img.width = 1000; img.height = 688;
     fig.appendChild(img);
     card.appendChild(fig);
     card.appendChild(el('div', 'top-num', esc(t.num)));
@@ -270,7 +271,8 @@
   (S.gallery || []).forEach(function (p) {
     var fig = el('figure');
     var img = el('img');
-    img.src = p.src; img.alt = p.caption; img.loading = 'lazy';
+    img.src = p.src; img.alt = p.caption; img.loading = 'lazy'; img.decoding = 'async';
+    img.width = 1000; img.height = 750;
     fig.appendChild(img);
     fig.appendChild(el('figcaption', null, esc(p.caption)));
     g.appendChild(fig);
