@@ -97,7 +97,7 @@ window.SITE = {
     { src: "img/wheel-red.jpg", caption: "Меняю колесо прямо на трассе" },
     { src: "img/wheel-tools.jpg", caption: "Домкрат, ключи и снятое колесо" },
     { src: "img/battery-close.jpg", caption: "Аккумулятор: проверка и замена" },
-    { src: "img/spark.jpg",  caption: "Диагностика двигателя по свечам" },
+    { src: "img/engine-check.jpg", caption: "Ищу причину неисправности" },
     { src: "img/night.jpg",  caption: "Работа в темноте" }
   ],
 
