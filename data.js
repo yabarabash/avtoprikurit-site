@@ -99,7 +99,8 @@ window.SITE = {
     { src: "img/wheel-lock.jpg", caption: "Разблокировка заклиневшего колеса" },
     { src: "img/battery-jump.jpg", caption: "Прикуривание севшего аккумулятора" },
     { src: "img/battery-replace.jpg", caption: "Замена аккумулятора" },
-    { src: "img/battery-check.jpg", caption: "Прикуривание аккумулятора" }
+    { src: "img/battery-check.jpg", caption: "Прикуривание аккумулятора" },
+    { src: "img/sway-bar.jpg", caption: "Замена стоек стабилизатора" }
   ],
 
   /* --- Доверие --- */
