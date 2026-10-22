@@ -94,7 +94,8 @@ window.SITE = {
     { src: "img/ford.jpg",   caption: "Ford: проверка двигателя" },
     { src: "img/battery.jpg", caption: "Аккумулятор и генератор" },
     { src: "img/brake.jpg",  caption: "Тормозные диски и суппорты" },
-    { src: "img/night.jpg",  caption: "Работа в темноте" }
+    { src: "img/night.jpg",  caption: "Работа в темноте" },
+    { src: "img/spare-wheel.jpg", caption: "Замена повреждённого колеса на запасное" }
   ],
 
   /* --- Доверие --- */
