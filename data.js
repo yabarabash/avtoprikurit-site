@@ -97,7 +97,6 @@ window.SITE = {
     { src: "img/spare-wheel.jpg",    caption: "Замена повреждённого колеса на запасное" },
     { src: "img/hood.jpg",           caption: "Диагностика под капотом" },
     { src: "img/wheel-lock.jpg",     caption: "Разблокировка заклиневшего колеса" },
-    { src: "img/ford.jpg",           caption: "Ford: проверка двигателя" },
     { src: "img/battery.jpg",        caption: "Замена аккумулятора" },
     { src: "img/sway-bar.jpg",       caption: "Замена стоек стабилизатора" },
     { src: "img/brake.jpg",          caption: "Замена тормозного диска" },
