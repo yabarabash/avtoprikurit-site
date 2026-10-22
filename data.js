@@ -97,7 +97,9 @@ window.SITE = {
     { src: "img/night.jpg",  caption: "Работа в темноте" },
     { src: "img/spare-wheel.jpg", caption: "Замена повреждённого колеса на запасное" },
     { src: "img/wheel-lock.jpg", caption: "Разблокировка заклиневшего колеса" },
-    { src: "img/battery-jump.jpg", caption: "Прикуривание севшего аккумулятора" }
+    { src: "img/battery-jump.jpg", caption: "Прикуривание севшего аккумулятора" },
+    { src: "img/battery-replace.jpg", caption: "Замена аккумулятора" },
+    { src: "img/battery-check.jpg", caption: "Прикуривание аккумулятора" }
   ],
 
   /* --- Доверие --- */
