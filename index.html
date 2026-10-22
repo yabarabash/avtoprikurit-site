@@ -317,7 +317,12 @@ if (/^\d+$/.test(YM_COUNTER_ID)) {
     <div class="wrap">
       <h2 class="sec-title">Живые работы</h2>
       <p class="sec-sub">Фотографии из моего альбома на Профи.ру — без стоковых картинок.</p>
-      <div class="gal" id="gallery"></div>
+      <div class="carousel carousel-works" id="worksCarousel">
+        <div class="carousel-track gal" id="gallery"></div>
+        <button class="carousel-btn carousel-prev" type="button" data-target="gallery" aria-label="Предыдущее фото">&#8249;</button>
+        <button class="carousel-btn carousel-next" type="button" data-target="gallery" aria-label="Следующее фото">&#8250;</button>
+      </div>
+      <p class="swipe-hint"><span class="swipe-hint-icon">&#8596;</span> Листайте фотографии свайпом</p>
     </div>
   </section>
 
@@ -447,7 +452,7 @@ if (/^\d+$/.test(YM_COUNTER_ID)) {
   </div>
 </footer>
 
-<script src="data.js?v=8"></script>
-<script src="app.js?v=8"></script>
+<script src="data.js?v=9"></script>
+<script src="app.js?v=9"></script>
 </body>
 </html>

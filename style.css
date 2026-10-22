@@ -196,16 +196,15 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.18; let
 .price-table td:last-child a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-on); }
 
 /* ---------- Галерея ---------- */
-.gal { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 20px; }
-.gal figure { margin: 0; grid-column: span 4; }
-.gal figure:nth-child(1) { grid-column: span 7; }
-.gal figure:nth-child(2) { grid-column: span 5; }
-.gal figure:nth-child(3) { grid-column: span 5; }
-.gal figure:nth-child(4) { grid-column: span 7; }
-.gal figure:nth-child(5) { grid-column: span 12; }
-.gal figure:nth-child(6) { grid-column: span 6; }
-.gal img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); }
-.gal figure:nth-child(1) img { aspect-ratio: 3/2; }
+.gal { display: flex; gap: 18px; }
+.gal figure {
+  margin: 0; flex: 0 0 360px; scroll-snap-align: start;
+  display: flex; flex-direction: column;
+}
+.gal img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover;
+  border-radius: var(--radius); background: var(--bg);
+}
 .gal figcaption { font-size: 14px; color: var(--muted); padding-top: 10px; }
 
 /* ---------- Этапы ---------- */
@@ -294,14 +293,13 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.18; let
   .trust-row { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 22px 0; }
   .trust-row li:nth-child(odd) { padding-left: 0; border-left: 0; }
   .head-nav { display: none; }
-  .gal figure, .gal figure:nth-child(n) { grid-column: span 6; }
-  .gal figure:nth-child(1) { grid-column: span 12; }
+  .gal figure { flex-basis: 300px; }
 }
 
 @media (max-width: 560px) {
   body { font-size: 16px; }
   .section { padding: 64px 0; }
-  .gal figure, .gal figure:nth-child(n) { grid-column: span 12; }
+  .gal figure { flex-basis: 78%; }
   .svc-list li { grid-template-columns: 1fr; row-gap: 2px; padding: 14px 0; }
   .svc-list .idx { grid-column: 1; margin-bottom: 2px; }
   .svc-list b, .svc-list .note { grid-column: 1; }

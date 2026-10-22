@@ -336,7 +336,7 @@
 /* --- Карусели (свайп + стрелки) --- */
 (function () {
   function stepOf(track) {
-    var card = track.querySelector('.review-card, .area-card');
+    var card = track.querySelector('.review-card, .area-card, .gal figure');
     if (!card) return 320;
     var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 16) || 16;
     return card.getBoundingClientRect().width + gap;
