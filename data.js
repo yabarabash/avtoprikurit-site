@@ -92,7 +92,7 @@ window.SITE = {
   gallery: [
     { src: "img/hood.jpg",   caption: "Диагностика под капотом" },
     { src: "img/ford.jpg",   caption: "Ford: проверка двигателя" },
-    { src: "img/battery.jpg", caption: "Аккумулятор и генератор" },
+    { src: "img/battery.jpg", caption: "Замена аккумулятора" },
     { src: "img/brake.jpg",  caption: "Тормозные диски и суппорты" },
     { src: "img/night.jpg",  caption: "Работа в темноте" },
     { src: "img/spare-wheel.jpg", caption: "Замена повреждённого колеса на запасное" },
@@ -101,7 +101,8 @@ window.SITE = {
     { src: "img/battery-replace.jpg", caption: "Замена аккумулятора" },
     { src: "img/battery-check.jpg", caption: "Прикуривание аккумулятора" },
     { src: "img/sway-bar.jpg", caption: "Замена стоек стабилизатора" },
-    { src: "img/battery-check2.jpg", caption: "Прикуривание севшего аккумулятора" }
+    { src: "img/battery-check2.jpg", caption: "Прикуривание севшего аккумулятора" },
+    { src: "img/booster.jpg", caption: "Прикуривание аккумулятора автомобиля бустером" }
   ],
 
   /* --- Доверие --- */
