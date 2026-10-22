@@ -95,7 +95,9 @@ window.SITE = {
     { src: "img/battery.jpg", caption: "Аккумулятор и генератор" },
     { src: "img/brake.jpg",  caption: "Тормозные диски и суппорты" },
     { src: "img/night.jpg",  caption: "Работа в темноте" },
-    { src: "img/spare-wheel.jpg", caption: "Замена повреждённого колеса на запасное" }
+    { src: "img/spare-wheel.jpg", caption: "Замена повреждённого колеса на запасное" },
+    { src: "img/wheel-lock.jpg", caption: "Разблокировка заклиневшего колеса" },
+    { src: "img/battery-jump.jpg", caption: "Прикуривание севшего аккумулятора" }
   ],
 
   /* --- Доверие --- */
