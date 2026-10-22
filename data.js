@@ -90,19 +90,19 @@ window.SITE = {
 
   /* --- Фотогалерея (реальные фото работ) --- */
   gallery: [
-    { src: "img/hood.jpg",   caption: "Диагностика под капотом" },
-    { src: "img/ford.jpg",   caption: "Ford: проверка двигателя" },
-    { src: "img/battery.jpg", caption: "Замена аккумулятора" },
-    { src: "img/brake.jpg",  caption: "Тормозные диски и суппорты" },
-    { src: "img/night.jpg",  caption: "Работа в темноте" },
-    { src: "img/spare-wheel.jpg", caption: "Замена повреждённого колеса на запасное" },
-    { src: "img/wheel-lock.jpg", caption: "Разблокировка заклиневшего колеса" },
-    { src: "img/battery-jump.jpg", caption: "Прикуривание севшего аккумулятора" },
-    { src: "img/battery-replace.jpg", caption: "Замена аккумулятора" },
-    { src: "img/battery-check.jpg", caption: "Прикуривание аккумулятора" },
-    { src: "img/sway-bar.jpg", caption: "Замена стоек стабилизатора" },
+    { src: "img/booster.jpg",        caption: "Прикуривание аккумулятора автомобиля бустером" },
+    { src: "img/battery-check.jpg",  caption: "Прикуривание аккумулятора" },
+    { src: "img/battery-jump.jpg",   caption: "Прикуривание севшего аккумулятора" },
     { src: "img/battery-check2.jpg", caption: "Прикуривание севшего аккумулятора" },
-    { src: "img/booster.jpg", caption: "Прикуривание аккумулятора автомобиля бустером" }
+    { src: "img/spare-wheel.jpg",    caption: "Замена повреждённого колеса на запасное" },
+    { src: "img/hood.jpg",           caption: "Диагностика под капотом" },
+    { src: "img/wheel-lock.jpg",     caption: "Разблокировка заклиневшего колеса" },
+    { src: "img/ford.jpg",           caption: "Ford: проверка двигателя" },
+    { src: "img/battery.jpg",        caption: "Замена аккумулятора" },
+    { src: "img/sway-bar.jpg",       caption: "Замена стоек стабилизатора" },
+    { src: "img/brake.jpg",          caption: "Замена тормозного диска" },
+    { src: "img/night.jpg",          caption: "Работа в темноте" },
+    { src: "img/battery-replace.jpg", caption: "Замена аккумулятора" }
   ],
 
   /* --- Доверие --- */
