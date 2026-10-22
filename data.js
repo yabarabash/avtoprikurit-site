@@ -100,7 +100,8 @@ window.SITE = {
     { src: "img/battery-jump.jpg", caption: "Прикуривание севшего аккумулятора" },
     { src: "img/battery-replace.jpg", caption: "Замена аккумулятора" },
     { src: "img/battery-check.jpg", caption: "Прикуривание аккумулятора" },
-    { src: "img/sway-bar.jpg", caption: "Замена стоек стабилизатора" }
+    { src: "img/sway-bar.jpg", caption: "Замена стоек стабилизатора" },
+    { src: "img/battery-check2.jpg", caption: "Прикуривание севшего аккумулятора" }
   ],
 
   /* --- Доверие --- */
