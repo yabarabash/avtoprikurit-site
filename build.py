@@ -103,7 +103,7 @@ MAP = {
     "__REQLINE__": esc(REQLINE),
     "__INNLINE__": esc(INNLINE),
     "__PUBDATE__": "26 октября 2026 г.",
-    "__SITEURL__": "https://автоприкурить.рф",
+    "__SITEURL__": "https://xn--80aesajwhicohj4j.xn--p1ai",
     "__OPNAME__": esc(S.get("legalName", "")),
     "__OPCONTACTS__": "Заявки принимаются через форму на Сайте, профиль на Профи.ру и мессенджер мастера, указанный на Сайте.",
     "__LEGALFORM__": esc(LEGALFORM),
