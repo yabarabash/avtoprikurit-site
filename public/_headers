@@ -1,11 +1,4 @@
 /*
-  Заголовки безопасности для Cloudflare (static assets / Pages)
-  HSTS — принудительный HTTPS
-  CSP — ограничение источников скриптов
-  Permissions-Policy — отключаем лишние браузерные API
-*/
-
-/*
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://mc.yandex.ru https://yastatic.net; connect-src 'self' https://mc.yandex.ru https://yastatic.net https://profi-reviews.spru.run https://lead-relay-pomoshch.spru.run; frame-src https://mc.yandex.ru; object-src 'none'; base-uri 'self'; form-action 'self' https://lead-relay-pomoshch.spru.run; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
@@ -13,4 +6,3 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
   Cross-Origin-Opener-Policy: same-origin
-*/
