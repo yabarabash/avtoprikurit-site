@@ -65,7 +65,8 @@ if inn:
     req.append("ИНН %s" % inn)
 if ogrn:
     req.append("ОГРНИП %s" % ogrn)
-REQLINE = " · ".join(req) if req else "ИНН и ОГРНИП указываются по запросу"
+REQLINE = " · ".join(req) if req else "указывается по запросу"
+INNLINE = ("ИНН " + inn) if inn else "указывается по запросу"
 LEGALFORM = S.get("legalForm", "")
 SCHEDULE = S.get("schedule", "")
 
@@ -100,6 +101,7 @@ MAP = {
     "__BRAND_NAME__": esc(S.get("brandName", "")),
     "__BRAND_ROLE__": esc(S.get("brandRole", "")),
     "__REQLINE__": esc(REQLINE),
+    "__INNLINE__": esc(INNLINE),
     "__PUBDATE__": "26 октября 2026 г.",
     "__SITEURL__": "https://xn--80aesajwhicohj4j.xn--p1ai",
     "__OPNAME__": esc(S.get("legalName", "")),
@@ -119,7 +121,7 @@ def fill(text):
 tpl = fill(io.open(os.path.join(ROOT, "index.template.html"), encoding="utf-8").read())
 
 # отдельные страницы: контакты и политика
-for name in ("contacts.html", "policy.html", "privacy.html"):
+for name in ("contacts.html", "policy.html"):
     src = os.path.join(ROOT, name.replace(".html", ".template.html"))
     if os.path.exists(src):
         io.open(os.path.join(ROOT, name), "w", encoding="utf-8").write(

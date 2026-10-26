@@ -38,7 +38,6 @@
 
 <link rel="prefetch" href="/contacts.html" as="document">
 <link rel="prefetch" href="/policy.html" as="document">
-<link rel="prefetch" href="/privacy.html" as="document">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;700&display=swap" rel="stylesheet">
@@ -69,11 +68,9 @@
         "@type": "PostalAddress",
         "addressLocality": "Москва",
         "addressRegion": "Московская область",
-        "streetAddress": "Молодёжная",
         "addressCountry": "RU"
       },
       "geo": { "@type": "GeoCoordinates", "latitude": "55.899", "longitude": "37.929" },
-      "hasMap": "https://yandex.ru/maps/?text=Москва, Молодёжная",
       "areaServed": [
         { "@type": "City", "name": "Москва" },
         { "@type": "AdministrativeArea", "name": "Московская область" },
@@ -193,7 +190,7 @@
         {
           "@type": "Question",
           "name": "В каких районах Москвы и области вы выезжаете?",
-          "acceptedAnswer": { "@type": "Answer", "text": "В любой: МКАД, ТТК, Садовое, все основные шоссе и трассы — М-4, М-11, М-12, а также города Подмосковья. База рядом с Молодёжной, но выезд по всему городу и области 24/7." }
+          "acceptedAnswer": { "@type": "Answer", "text": "В любой: МКАД, ТТК, Садовое, все основные шоссе и трассы — М-4, М-11, М-12, а также города Подмосковья. Выезд по всему городу и области 24/7." }
         }
       ]
     }
@@ -396,19 +393,12 @@
       <h2 class="sec-title">Контакты и режим работы</h2>
       <p class="sec-sub">__SCHEDULE__</p>
       <div class="legal-card">
-        <p><b>Мастер:</b> __LEGAL_NAME__</p>
-        <p><b>Статус:</b> __LEGALFORM__</p>
-        <p><b>ИНН / ОГРНИП:</b> __REQLINE__</p>
-        <p><b>Адрес:</b> __LEGAL_ADDRESS__</p>
-        <p class="legal-note">__OGRN_NOTE__</p>
+        <p><b>ИНН:</b> __INNLINE__</p>
       </div>
       <p class="sec-sub">Заявки принимаю через форму ниже — отвечаю в мессенджере, звоню и называю точную цену до начала работ.</p>
       <p class="links-row">
         <a href="contacts.html">Контакты</a>
         <a href="policy.html">Политика обработки персональных данных</a>
-        <a href="contacts.html">Контакты</a>
-      <a href="policy.html">Политика обработки персональных данных</a>
-      <a href="privacy.html">Политика конфиденциальности</a>
       </p>
     </div>
   </section>
@@ -448,7 +438,7 @@
           <label for="f-what">Что случилось</label>
           <textarea id="f-what" name="Ситуация" rows="3" placeholder="Например: стою на трассе, не заводится, аккумулятор сел"></textarea>
         </div>
-        <p class="consent">Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с <a href="privacy.html">политикой конфиденциальности</a>.</p>
+        <p class="consent">Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с <a href="policy.html">политикой обработки персональных данных</a>.</p>
         <button class="btn btn-solid btn-lg btn-full" type="submit">Отправить заявку</button>
         <p class="form-status" id="formStatus" role="status"></p>
       </form>
@@ -473,12 +463,11 @@
       <button type="button" id="footPhone" data-call hidden></button>
       <a href="contacts.html">Контакты</a>
       <a href="policy.html">Политика обработки персональных данных</a>
-      <a href="privacy.html">Политика конфиденциальности</a>
     </nav>
   </div>
   <div class="wrap foot-legal">
     <p>__SCHEDULE__</p>
-    <p>__LEGAL_NAME__ · __LEGALFORM__ · __REQLINE__</p>
+    <p>__LEGAL_NAME__ · __INNLINE__</p>
   </div>
 </footer>
 
