@@ -1,9 +1,7 @@
 name = "lively-rice-099a"
-main = "worker.js"
 compatibility_date = "2026-10-26"
 workers_dev = true
 
 [assets]
 directory = "./public"
-binding = "ASSETS"
 not_found_handling = "404-page"
