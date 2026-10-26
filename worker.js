@@ -9,7 +9,7 @@ const SECURITY_HEADERS = {
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Permissions-Policy": "geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()",
   "Cross-Origin-Opener-Policy": "same-origin",
-  "X-Spru-Version": "nav-fix-5",
+  "X-Spru-Version": "debug-6",
 };
 
 const SHORT_PATHS = {
@@ -53,6 +53,7 @@ export default {
     const response = await env.ASSETS.fetch(assetRequest);
     const out = new Response(response.body, response);
     for (const [k, v] of Object.entries(SECURITY_HEADERS)) out.headers.set(k, v);
+    out.headers.set("X-Asset-Path", target.pathname);
     return out;
   },
 };
