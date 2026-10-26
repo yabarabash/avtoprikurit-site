@@ -9,7 +9,7 @@ const SECURITY_HEADERS = {
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Permissions-Policy": "geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()",
   "Cross-Origin-Opener-Policy": "same-origin",
-  "X-Spru-Version": "debug-6",
+  "X-Spru-Version": "worker-first-7",
 };
 
 const SHORT_PATHS = {
