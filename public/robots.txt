@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Host: xn--80aesajwhicohj4j.xn--p1ai
-Sitemap: https://xn--80aesajwhicohj4j.xn--p1ai/sitemap.xml
+Host: автоприкурить.рф
+Sitemap: https://автоприкурить.рф/sitemap.xml
