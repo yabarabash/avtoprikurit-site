@@ -37,6 +37,7 @@
 
   /* --- Бейджи --- */
   var kb = $('#heroBadges');
+  if (kb) kb.innerHTML = '';
   (S.badges || []).forEach(function (b) { kb.appendChild(el('li', null, esc(b))); });
 
   /* --- Телефон --- */
@@ -125,6 +126,7 @@
 
   /* --- Доверие --- */
   var tr = $('#trustRow');
+  if (tr) tr.innerHTML = '';
   (S.trust || []).forEach(function (t) {
     var li = el('li');
     li.appendChild(el('b', null, esc(t.label)));
@@ -134,6 +136,7 @@
 
   /* --- Топ-услуги --- */
   var tg = $('#topGrid');
+  if (tg) tg.innerHTML = '';
   (S.topServices || []).forEach(function (t) {
     var card = el('article', 'top-card');
     var fig = el('figure');
@@ -155,6 +158,7 @@
 
   /* --- Список услуг --- */
   var sl = $('#svcList');
+  if (sl) sl.innerHTML = '';
   (S.services || []).forEach(function (s, i) {
     var li = el('li');
     li.appendChild(el('span', 'idx', String(i + 1).padStart(2, '0')));
@@ -165,6 +169,7 @@
 
   /* --- Цены --- */
   var pb = $('#priceBody');
+  if (pb) pb.innerHTML = '';
   (S.priceRows || []).forEach(function (r) {
     var tr2 = el('tr');
     tr2.appendChild(el('td', null, esc(r.name)));
@@ -178,6 +183,7 @@
 
   /* --- О себе: факты --- */
   var af = $('#aboutFacts');
+  if (af) af.innerHTML = '';
   (S.aboutFacts || []).forEach(function (f) {
     var li = el('li');
     li.appendChild(el('span', null, esc(f.k)));
@@ -187,12 +193,14 @@
 
   /* --- География --- */
   var al = $('#areaList');
+  if (al) al.innerHTML = '';
   (S.areas || []).forEach(function (a) {
     al.appendChild(el('li', 'area-card', esc(a)));
   });
 
   /* --- Вопросы --- */
   var fl = $('#faqList');
+  if (fl) fl.innerHTML = '';
   (S.faq || []).forEach(function (f) {
     var d = el('div', 'faq-item');
     d.appendChild(el('h3', null, esc(f.q)));
@@ -268,6 +276,7 @@
 
   /* --- Галерея --- */
   var g = $('#gallery');
+  if (g) g.innerHTML = '';
   (S.gallery || []).forEach(function (p) {
     var fig = el('figure');
     var img = el('img');
@@ -280,6 +289,7 @@
 
   /* --- Этапы --- */
   var st = $('#steps');
+  if (st) st.innerHTML = '';
   (S.steps || []).forEach(function (s) {
     var li = el('li');
     li.appendChild(el('span', 'num', esc(s.num)));
@@ -361,4 +371,69 @@
       if (Math.abs(track.scrollLeft) > 8) hint.classList.add('is-hidden');
     }, { passive: true });
   });
+})();
+
+
+/* --- Cookie-баннер и Метрика только после согласия (ФЗ-152) --- */
+(function () {
+  var KEY = 'ap_cookie_consent';
+  var bar = document.getElementById('cookieBar');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var rejectBtn = document.getElementById('cookieReject');
+  var settingsBtn = document.getElementById('cookieSettings');
+  var textEl = document.getElementById('cookieText');
+  var S = window.SITE || {};
+
+  if (textEl) textEl.textContent = S.cookieText || '';
+  if (acceptBtn) acceptBtn.textContent = S.cookieAccept || 'Принять';
+  if (rejectBtn) rejectBtn.textContent = S.cookieReject || 'Отказаться';
+  if (settingsBtn) settingsBtn.textContent = S.cookieSettings || 'Настройки cookie';
+
+  function loadMetrika() {
+    if (window.__ymLoaded) return;
+    window.__ymLoaded = true;
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) return; }
+      k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113737965', 'ym');
+    window.ym(113737965, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+  }
+
+  function read() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function write(v) {
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+  }
+
+  function showBar() {
+    if (!bar) return;
+    bar.hidden = false;
+    if (settingsBtn) settingsBtn.hidden = true;
+  }
+  function hideBar() {
+    if (!bar) return;
+    bar.hidden = true;
+    if (settingsBtn) settingsBtn.hidden = false;
+  }
+
+  var consent = read();
+  if (consent === 'yes') {
+    loadMetrika();
+    hideBar();
+  } else if (consent === 'no') {
+    hideBar();
+  } else {
+    showBar();
+  }
+
+  if (acceptBtn) acceptBtn.addEventListener('click', function () {
+    write('yes'); loadMetrika(); hideBar();
+  });
+  if (rejectBtn) rejectBtn.addEventListener('click', function () {
+    write('no'); hideBar();
+  });
+  if (settingsBtn) settingsBtn.addEventListener('click', function () { showBar(); });
 })();

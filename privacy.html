@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Политика конфиденциальности — Помощь на дороге, Москва</title>
-<meta name="robots" content="noindex">
+<title>Политика конфиденциальности — помощь на дороге в Москве 24/7</title>
+<meta name="description" content="Политика конфиденциальности сайта автопомощи на дороге: какие данные собирает форма заявки, сроки хранения, права пользователя и защита данных.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://xn--80aesajwhicohj4j.xn--p1ai/privacy.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Политика конфиденциальности — помощь на дороге">
+<meta property="og:url" content="https://xn--80aesajwhicohj4j.xn--p1ai/privacy.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;700&display=swap" rel="stylesheet">
@@ -18,21 +23,20 @@
   .legal p, .legal li { color: var(--muted); max-width: 72ch; }
   .legal ul { padding-left: 20px; }
   .legal a { color: var(--fg); }
-  .back { display: inline-block; margin-bottom: 26px; text-decoration: none; border-bottom: 1px solid var(--border); }
 </style>
 </head>
 <body>
+
 <main class="legal">
   <div class="wrap">
-    <a class="back" href="index.html">← На главную</a>
+    <a class="back" href="/">← На главную</a>
     <h1>Политика конфиденциальности</h1>
-    <p class="date">Дата публикации: <span id="pubDate"></span></p>
+    <p class="date">Дата публикации: 26 октября 2026 г.</p>
 
     <h2>1. Общие положения</h2>
-    <p>Настоящая Политика определяет порядок обработки персональных данных посетителей сайта <span id="siteUrl"></span> (далее — Сайт).</p>
-    <p>Оператор персональных данных: <b id="opName"></b> (далее — Оператор).<br>
-    <span id="opEmailLine"></span><br>
-    <span id="opPhone"></span></p>
+    <p>Настоящая Политика определяет порядок обработки персональных данных посетителей сайта https://xn--80aesajwhicohj4j.xn--p1ai (далее — Сайт).</p>
+    <p>Оператор персональных данных: Максим А., автомобильный мастер на выезд (далее — Оператор).<br>
+    Заявки принимаются через форму на Сайте, профиль на Профи.ру и мессенджер мастера, указанный на Сайте.</p>
     <p>Заполняя формы на Сайте, вы даёте согласие на обработку ваших персональных данных в соответствии с настоящей Политикой и Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
 
     <h2>2. Какие данные собираются</h2>
@@ -61,23 +65,10 @@
     <p>Оператор принимает необходимые организационные и технические меры для защиты персональных данных от неправомерного доступа, уничтожения, изменения, блокирования и иных неправомерных действий.</p>
 
     <h2>7. Заключительные положения</h2>
-    <p>Оператор вправе вносить изменения в настоящую Политику. Актуальная версия размещена по адресу: <span id="siteUrl2"></span>/privacy</p>
+    <p>Оператор вправе вносить изменения в настоящую Политику. Актуальная версия размещена по адресу: https://xn--80aesajwhicohj4j.xn--p1ai/privacy.html</p>
     <p>Политика действует бессрочно до замены новой версией.</p>
   </div>
 </main>
-<script src="data.js"></script>
-<script>
-(function(){
-  var S = window.SITE || {};
-  var url = location.origin + location.pathname.replace(/privacy\.html$/, '');
-  function set(sel, val){ var n=document.querySelector(sel); if(n) n.textContent = val||''; }
-  set('#pubDate', new Date().toLocaleDateString('ru-RU'));
-  set('#siteUrl', url); set('#siteUrl2', url);
-  set('#opName', S.name || 'Максим А.');
-  var emailLine = S.email ? 'Email: ' + S.email : 'Заявки принимаются через форму на Сайте, профиль на Профи.ру и мессенджер мастера, указанный на Сайте.';
-  set('#opEmailLine', emailLine);
-  set('#opPhone', S.phone ? 'Телефон: ' + S.phone : '');
-})();
-</script>
+
 </body>
 </html>
