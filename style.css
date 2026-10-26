@@ -411,25 +411,25 @@ button { font-family: inherit; }
 }
 
 /* --- Cookie-баннер (ФЗ-152) --- */
-.cookie-bar {
+.notice-bar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
   background: rgba(15, 17, 21, .97); color: #fff;
   border-top: 1px solid rgba(255, 255, 255, .12);
   box-shadow: 0 -8px 30px rgba(0, 0, 0, .35);
 }
-.cookie-bar[hidden] { display: none; }
+.notice-bar[hidden] { display: none; }
 .cookie-inner {
   max-width: 1200px; margin: 0 auto; padding: 16px 20px;
   display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
 }
 .cookie-text { margin: 0; flex: 1 1 420px; font-size: 14px; line-height: 1.5; opacity: .9; }
 .cookie-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.cookie-settings {
+.notice-settings {
   position: fixed; left: 12px; bottom: 12px; z-index: 89;
   background: transparent; border: 1px solid rgba(255,255,255,.35); color: #fff;
   border-radius: 999px; padding: 7px 14px; font-size: 12px; cursor: pointer;
 }
-.cookie-settings[hidden] { display: none; }
+.notice-settings[hidden] { display: none; }
 
 /* --- SEO-текст --- */
 .seo-list { display: grid; gap: 22px; }

@@ -377,17 +377,17 @@
 /* --- Cookie-баннер и Метрика только после согласия (ФЗ-152) --- */
 (function () {
   var KEY = 'ap_cookie_consent';
-  var bar = document.getElementById('cookieBar');
+  var bar = document.getElementById('noticeBar');
   var acceptBtn = document.getElementById('cookieAccept');
   var rejectBtn = document.getElementById('cookieReject');
-  var settingsBtn = document.getElementById('cookieSettings');
+  var settingsBtn = document.getElementById('noticeSettings');
   var textEl = document.getElementById('cookieText');
   var S = window.SITE || {};
 
   if (textEl) textEl.textContent = S.cookieText || '';
   if (acceptBtn) acceptBtn.textContent = S.cookieAccept || 'Принять';
   if (rejectBtn) rejectBtn.textContent = S.cookieReject || 'Отказаться';
-  if (settingsBtn) settingsBtn.textContent = S.cookieSettings || 'Настройки cookie';
+  if (settingsBtn) settingsBtn.textContent = S.noticeSettings || 'Настройки cookie';
 
   function loadMetrika() {
     if (window.__ymLoaded) return;
