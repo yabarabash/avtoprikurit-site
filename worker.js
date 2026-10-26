@@ -33,13 +33,21 @@ export default {
       return Response.redirect(`https://${url.hostname}${SHORT_PATHS[url.pathname]}`, 301);
     }
 
-    // html_handling = "none": корень и каталоги отдаём как index.html
-    let assetRequest = request;
-    if (url.pathname.endsWith("/")) {
-      const u = new URL(request.url);
-      u.pathname = url.pathname + "index.html";
-      assetRequest = new Request(u.toString(), request);
-    }
+    // html_handling = "none": корень и каталоги отдаём как index.html.
+    // Заголовки Sec-Fetch-* убираем: с ними слой ассетов отвечает 404 на "/".
+    const target = new URL(request.url);
+    if (target.pathname.endsWith("/")) target.pathname += "index.html";
+
+    const headers = new Headers(request.headers);
+    headers.delete("Sec-Fetch-Mode");
+    headers.delete("Sec-Fetch-Dest");
+    headers.delete("Sec-Fetch-Site");
+    headers.delete("Sec-Fetch-User");
+
+    const assetRequest = new Request(target.toString(), {
+      method: "GET",
+      headers,
+    });
 
     const response = await env.ASSETS.fetch(assetRequest);
     const out = new Response(response.body, response);
