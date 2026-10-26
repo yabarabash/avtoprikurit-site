@@ -11,7 +11,12 @@ const SECURITY_HEADERS = {
   "Cross-Origin-Opener-Policy": "same-origin",
 };
 
-const SHORT_PATHS = { "/contacts": "/contacts.html", "/policy": "/policy.html" };
+const SHORT_PATHS = {
+  "/contacts": "/contacts.html",
+  "/policy": "/policy.html",
+  "/privacy": "/policy.html",
+  "/privacy.html": "/policy.html",
+};
 
 export default {
   async fetch(request, env) {
