@@ -1,6 +1,0 @@
-# www -> основной домен
-http://www.xn--80aesajwhicohj4j.xn--p1ai/*  https://xn--80aesajwhicohj4j.xn--p1ai/:splat  301
-https://www.xn--80aesajwhicohj4j.xn--p1ai/*  https://xn--80aesajwhicohj4j.xn--p1ai/:splat  301
-# краткие адреса страниц
-/contacts  /contacts.html  301
-/policy    /policy.html    301
