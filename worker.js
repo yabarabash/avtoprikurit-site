@@ -28,7 +28,15 @@ export default {
       return Response.redirect(`https://${url.hostname}${SHORT_PATHS[url.pathname]}`, 301);
     }
 
-    const response = await env.ASSETS.fetch(request);
+    // html_handling = "none": корень и каталоги отдаём как index.html
+    let assetRequest = request;
+    if (url.pathname.endsWith("/")) {
+      const u = new URL(request.url);
+      u.pathname = url.pathname + "index.html";
+      assetRequest = new Request(u.toString(), request);
+    }
+
+    const response = await env.ASSETS.fetch(assetRequest);
     const out = new Response(response.body, response);
     for (const [k, v] of Object.entries(SECURITY_HEADERS)) out.headers.set(k, v);
     return out;
