@@ -230,7 +230,6 @@ for pg in pages:
     if not photo.startswith("/") and not photo.startswith("http"):
         photo = "/" + photo
     og = photo if photo.startswith("http") else SITEURL + photo
-    og = og[:-5] + ".jpg" if og.endswith(".webp") else og  # соцсети не любят webp
     html = (SVC_TPL
             .replace("__PAGE_TITLE__", esc(pg["title"]))
             .replace("__PAGE_DESC__", esc(pg["desc"]))

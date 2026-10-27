@@ -12,9 +12,5 @@ for d in prikurit-avto shinomontazh zamen-akb vskrytie-avtomobilya zapusk-dvigat
     cp "$d/index.html" "public/$d/index.html"
   fi
 done
-# картинки: копируем актуальные (webp) и убираем старые jpg
-rm -rf public/img
-mkdir -p public/img
-cp img/* public/img/
 rm -f public/_headers public/_redirects
 echo "public/ обновлён"
