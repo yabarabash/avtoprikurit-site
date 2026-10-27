@@ -64,8 +64,12 @@ export default {
     const out = new Response(response.body, response);
     for (const [k, v] of Object.entries(SECURITY_HEADERS)) out.headers.set(k, v);
     // Кэшируем картинки и стили надолго: имена файлов меняются при правках.
-    if (/\.(webp|jpg|jpeg|png|svg|ico|css|js)$/i.test(url.pathname)) {
+    if (/\.(webp|jpg|jpeg|png|svg|ico)$/i.test(url.pathname)) {
+      // картинки кэшируем надолго: имя меняется при правке
       out.headers.set("Cache-Control", "public, max-age=2592000, immutable");
+    } else if (/\.(css|js)$/i.test(url.pathname)) {
+      // стили и скрипты — коротко, иначе правки не долетают до вернувшихся посетителей
+      out.headers.set("Cache-Control", "public, max-age=600, must-revalidate");
     }
     return out;
   },
