@@ -63,10 +63,6 @@ export default {
     const response = await env.ASSETS.fetch(assetRequest);
     const out = new Response(response.body, response);
     for (const [k, v] of Object.entries(SECURITY_HEADERS)) out.headers.set(k, v);
-    // Кэшируем картинки и стили надолго: имена файлов меняются при правках.
-    if (/\.(webp|jpg|jpeg|png|svg|ico|css|js)$/i.test(url.pathname)) {
-      out.headers.set("Cache-Control", "public, max-age=2592000, immutable");
-    }
     return out;
   },
 };
