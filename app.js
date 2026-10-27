@@ -107,6 +107,11 @@
     if (!n) return;
     if (href) { n.href = href; n.hidden = false; } else { n.hidden = true; }
   }
+  ['telegram', 'max', 'whatsapp'].forEach(function (m) {
+    var href = S[m];
+    if (!href) return;
+    document.querySelectorAll('[data-msg="' + m + '"]').forEach(function (a) { a.href = href; });
+  });
   var hasMsg = false;
   if (S.telegram) { hasMsg = true; }
   if (S.whatsapp) { hasMsg = true; }

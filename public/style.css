@@ -479,3 +479,17 @@ button { font-family: inherit; }
 .svc-links { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 22px 0 0; padding: 0; list-style: none; }
 .svc-links a { color: var(--fg); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
 .svc-links a:hover { color: var(--accent); }
+
+/* ---------- Иконки мессенджеров ---------- */
+.msg-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.msg-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px; border: 1px solid var(--border); border-radius: 999px;
+  background: rgba(255,255,255,.04); color: var(--text, #fff);
+  font-size: 15px; text-decoration: none; transition: border-color .18s, background .18s, transform .18s;
+}
+.msg-btn:hover { border-color: var(--accent, #ffb400); background: rgba(255,255,255,.08); transform: translateY(-1px); }
+.msg-btn svg { display: block; }
+.msg-btn[data-msg="telegram"] svg { color: #2AABEE; }
+.msg-btn[data-msg="whatsapp"] svg { color: #25D366; }
+.msg-btns-form { margin: 10px 0 18px; }

@@ -28,7 +28,8 @@ window.SITE = {
   formCallHidden: "Срочно? Оставьте заявку — перезвоню в течение 15 минут.",
   email: "",                       // почта для политики конфиденциальности
   telegram: "https://t.me/mak84sim",  // ссылка на Telegram или "@username"
-  whatsapp: "",                    // ссылка на WhatsApp
+  whatsapp: "https://lead-relay-pomoshch.spru.run/wa?key=A_kHOWr_rKk_5FTj", // редирект на WhatsApp: номер хранится на сервере
+  max: "https://lead-relay-pomoshch.spru.run/max?key=A_kHOWr_rKk_5FTj",      // редирект на профиль в MAX
   profi: "https://profi.ru/profile/AfoninMV14/share",
 
   /* --- Дублирование заявок (необязательно) --- */
