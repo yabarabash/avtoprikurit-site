@@ -11,6 +11,11 @@ const SECURITY_HEADERS = {
   "Cross-Origin-Opener-Policy": "same-origin",
 };
 
+const SERVICE_PAGES = [
+  "prikurit-avto", "shinomontazh", "zamen-akb",
+  "vskrytie-avtomobilya", "zapusk-dvigatelya", "diagnostika",
+];
+
 const SHORT_PATHS = {
   "/contacts": "/contacts.html",
   "/policy": "/policy.html",
@@ -26,6 +31,12 @@ export default {
     if (url.hostname.startsWith("www.") || url.protocol === "http:") {
       const host = url.hostname.replace(/^www\./, "");
       return Response.redirect(`https://${host}${url.pathname}${url.search}`, 301);
+    }
+
+    // /prikurit-avto -> /prikurit-avto/ (каталоги посадочных страниц)
+    if (!url.pathname.endsWith("/") && !/\.[a-zA-Z0-9]{2,5}$/.test(url.pathname)
+        && SERVICE_PAGES.includes(url.pathname.slice(1))) {
+      return Response.redirect(`https://${url.hostname}${url.pathname}/${url.search}`, 301);
     }
 
     // короткие адреса страниц

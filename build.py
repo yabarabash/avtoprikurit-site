@@ -70,6 +70,17 @@ INNLINE = ("ИНН " + inn) if inn else "указывается по запро�
 LEGALFORM = S.get("legalForm", "")
 SCHEDULE = S.get("schedule", "")
 
+
+# --- Статические отзывы (для поисковиков) ---
+REVIEWS = "".join(
+    '<article class="review-card"><div class="review-top"><div><div class="review-author">%s</div>'
+    '<div class="review-date">%s</div></div><div class="review-mark">★★★★★</div></div>'
+    '<p class="review-text">%s</p><div class="review-service">%s</div></article>'
+    % (esc(r.get("author", "")), esc(r.get("date", "")), esc(r.get("text", "")), esc(r.get("service", "")))
+    for r in S.get("reviewsFallback", []))
+
+REVIEW_COUNT = S.get("reviewsCount", 143)
+
 MAP = {
     "__BADGES__": BADGES,
     "__TRUST__": TRUST,
@@ -85,7 +96,7 @@ MAP = {
     "__HERO_TITLE__": esc(S["heroTitle"]),
     "__HERO_LEAD__": esc(S["heroLead"]),
     "__ABOUT_TITLE__": esc(S["aboutTitle"]),
-    "__ABOUT_TEXT__": esc((S.get("aboutText") or "").replace("{REVIEWS}", "140")),
+    "__ABOUT_TEXT__": esc((S.get("aboutText") or "").replace("{REVIEWS}", str(REVIEW_COUNT))),
     "__PRICE_NOTE__": esc(S.get("priceNote", "")),
     "__PRICE_DISCOUNT__": esc(S.get("priceDiscount", "")),
     "__PRICE_DISCOUNT_NOTE__": esc(S.get("priceDiscountNote", "")),
@@ -96,6 +107,7 @@ MAP = {
     "__FAQ_TITLE__": esc(S.get("faqTitle", "")),
     "__REVIEWS_TITLE__": esc(S.get("reviewsTitle", "")),
     "__REVIEWS_SUB__": esc(S.get("reviewsSub", "")),
+    "__REVIEWS_STATIC__": REVIEWS,
     "__FOOT_NAME__": esc(S.get("role", "")),
     "__FOOT_NOTE__": esc(S.get("footerNote", "")),
     "__BRAND_NAME__": esc(S.get("brandName", "")),
@@ -117,6 +129,148 @@ def fill(text):
     for k, v in MAP.items():
         text = text.replace(k, v)
     return text
+
+# ======================================================================
+# Посадочные страницы под коммерческие запросы (servicePages в data.js)
+# ======================================================================
+SITEURL = "https://xn--80aesajwhicohj4j.xn--p1ai"
+pages = S.get("servicePages") or []
+
+def svc_body(pg):
+    return "".join('<article class="seo-block"><h2>%s</h2><p>%s</p></article>'
+                   % (esc(b["h"]), esc(b["p"])) for b in pg["body"])
+
+def svc_faq(pg):
+    return "".join('<div class="faq-item"><h3>%s</h3><p>%s</p></div>'
+                   % (esc(f["q"]), esc(f["a"])) for f in pg["faq"])
+
+def svc_reviews():
+    items = (S.get("reviewsFallback") or [])[:4]
+    return "".join(
+        '<article class="review-card"><div class="review-top"><div><div class="review-author">%s</div>'
+        '<div class="review-date">%s</div></div><div class="review-mark">★★★★★</div></div>'
+        '<p class="review-text">%s</p><div class="review-service">%s</div></article>'
+        % (esc(r.get("author", "")), esc(r.get("date", "")), esc(r.get("text", "")), esc(r.get("service", "")))
+        for r in items)
+
+def svc_links(pg):
+    out = []
+    for other in pages:
+        if other["slug"] == pg["slug"]:
+            continue
+        out.append('<li><a href="/%s/">%s</a></li>' % (other["slug"], esc(other["h1"])))
+    out.append('<li><a href="/">Помощь на дороге в Москве и области</a></li>')
+    return "".join(out)
+
+def svc_ld(pg):
+    url = "%s/%s/" % (SITEURL, pg["slug"])
+    graph = [
+        {
+            "@type": "Service",
+            "@id": url + "#service",
+            "name": pg["h1"],
+            "serviceType": pg["h1"],
+            "description": pg["desc"],
+            "url": url,
+            "provider": {"@id": SITEURL + "/#business"},
+            "areaServed": [
+                {"@type": "City", "name": "Москва"},
+                {"@type": "AdministrativeArea", "name": "Московская область"},
+            ],
+            "availableChannel": {
+                "@type": "ServiceChannel",
+                "serviceUrl": SITEURL + "/#form",
+                "availableLanguage": {"@type": "Language", "name": "Русский"},
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1",
+                "reviewCount": str(REVIEW_COUNT),
+            },
+        },
+        {
+            "@type": "FAQPage",
+            "@id": url + "#faq",
+            "mainEntity": [
+                {"@type": "Question", "name": f["q"],
+                 "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
+                for f in pg["faq"]
+            ],
+        },
+        {
+            "@type": "ItemList",
+            "name": "Отзывы клиентов",
+            "itemListElement": [
+                {"@type": "Review",
+                 "itemReviewed": {"@id": SITEURL + "/#business"},
+                 "author": {"@type": "Person", "name": r.get("author", "Клиент")},
+                 "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+                 "reviewBody": r.get("text", "")}
+                for r in (S.get("reviewsFallback") or [])[:4]
+            ],
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": url + "#crumbs",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Главная", "item": SITEURL + "/"},
+                {"@type": "ListItem", "position": 2, "name": pg["h1"], "item": url},
+            ],
+        },
+    ]
+    return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=2)
+
+SVC_TPL = io.open(os.path.join(ROOT, "service.template.html"), encoding="utf-8").read()
+SVC_LINKS_INDEX = []
+for pg in pages:
+    url = "%s/%s/" % (SITEURL, pg["slug"])
+    photo = pg["photo"]
+    if not photo.startswith("/") and not photo.startswith("http"):
+        photo = "/" + photo
+    og = photo if photo.startswith("http") else SITEURL + photo
+    html = (SVC_TPL
+            .replace("__PAGE_TITLE__", esc(pg["title"]))
+            .replace("__PAGE_DESC__", esc(pg["desc"]))
+            .replace("__PAGE_KEYWORDS__", esc(pg.get("keywords", "")))
+            .replace("__PAGE_URL__", url)
+            .replace("__PAGE_OG_IMAGE__", og)
+            .replace("__PAGE_H1__", esc(pg["h1"]))
+            .replace("__PAGE_SHORT__", esc(pg["h1"]))
+            .replace("__PAGE_LEAD__", esc(pg["lead"]))
+            .replace("__PAGE_PHOTO__", photo)
+            .replace("__PAGE_BODY__", svc_body(pg))
+            .replace("__PAGE_FAQ__", svc_faq(pg))
+            .replace("__PAGE_REVIEWS__", svc_reviews())
+            .replace("__PAGE_LINKS__", svc_links(pg))
+            .replace("__PAGE_LD__", svc_ld(pg)))
+    d = os.path.join(ROOT, pg["slug"])
+    os.makedirs(d, exist_ok=True)
+    io.open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(html)
+    leftover = re.findall(r"__[A-Z_]+__", html)
+    if leftover:
+        sys.exit("Страница %s: не подставлены маркеры %s" % (pg["slug"], sorted(set(leftover))))
+    words = len(re.sub(r"<[^>]+>", " ", html).split())
+    print("/%s/  title %d, desc %d, слов %d" % (pg["slug"], len(pg["title"]), len(pg["desc"]), words))
+    SVC_LINKS_INDEX.append('<li><a href="/%s/">%s</a></li>' % (pg["slug"], esc(pg["h1"])))
+
+MAP["__SVC_LINKS__"] = "".join(SVC_LINKS_INDEX)
+
+# sitemap с посадочными страницами
+sm = ['<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+def u(loc, prio, changefreq="weekly", lastmod="2026-10-27"):
+    sm.extend(["  <url>", "    <loc>%s</loc>" % loc, "    <lastmod>%s</lastmod>" % lastmod,
+               "    <changefreq>%s</changefreq>" % changefreq, "    <priority>%s</priority>" % prio, "  </url>"])
+u(SITEURL + "/", "1.0")
+for pg in pages:
+    u("%s/%s/" % (SITEURL, pg["slug"]), "0.9")
+u(SITEURL + "/contacts.html", "0.6", "monthly")
+u(SITEURL + "/policy.html", "0.4", "yearly")
+sm.append("</urlset>")
+io.open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write("\n".join(sm) + "\n")
+print("sitemap.xml: %d URL" % (2 + len(pages)))
 
 tpl = fill(io.open(os.path.join(ROOT, "index.template.html"), encoding="utf-8").read())
 
