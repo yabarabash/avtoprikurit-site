@@ -231,6 +231,12 @@ for pg in pages:
         photo = "/" + photo
     og = photo if photo.startswith("http") else SITEURL + photo
     og = og[:-5] + ".jpg" if og.endswith(".webp") else og  # соцсети не любят webp
+    try:
+        from PIL import Image
+        with Image.open(os.path.join(ROOT, pg["photo"].lstrip("/"))) as im:
+            pw, ph = im.size
+    except Exception:
+        pw, ph = 1000, 750
     html = (SVC_TPL
             .replace("__PAGE_TITLE__", esc(pg["title"]))
             .replace("__PAGE_DESC__", esc(pg["desc"]))
@@ -241,6 +247,8 @@ for pg in pages:
             .replace("__PAGE_SHORT__", esc(pg["h1"]))
             .replace("__PAGE_LEAD__", esc(pg["lead"]))
             .replace("__PAGE_PHOTO__", photo)
+            .replace("__PHOTO_W__", str(pw))
+            .replace("__PHOTO_H__", str(ph))
             .replace("__PAGE_BODY__", svc_body(pg))
             .replace("__PAGE_FAQ__", svc_faq(pg))
             .replace("__PAGE_REVIEWS__", svc_reviews())
