@@ -19,7 +19,7 @@
   set('#heroTitle', S.heroTitle);
   set('#heroLead', S.heroLead);
   set('#aboutTitle', S.aboutTitle);
-  set('#aboutText', (S.aboutText || '').replace(/\{REVIEWS\}/g, '140'));
+  set('#aboutText', (S.aboutText || '').replace(/\{REVIEWS\}/g, String(S.reviewsCount || 143)));
   set('#formTitle', S.formTitle);
   set('#formNote', S.formNote);
   set('#priceNote', S.priceNote);
@@ -115,7 +115,7 @@
   var hasMsg = false;
   if (S.telegram) { hasMsg = true; }
   if (S.whatsapp) { hasMsg = true; }
-  if (!hasMsg) { var ml = $('#msgLinks'); if (ml) ml.innerHTML = 'в <a id="profiLink2b" target="_blank" rel="noopener">Профи.ру</a>'; }
+  if (!hasMsg) { var ml = $('#msgLinks'); if (ml) ml.innerHTML = 'в <a id="profiLink2b" target="_blank" rel="nofollow sponsored noopener">Профи.ру</a>'; }
   setLinks('#tgLink', S.telegram || '');
   setLinks('#waLink', S.whatsapp || '');
   setLinks('#shareTg', 'https://t.me/share/url?url=' + encodeURIComponent(location.href) + '&text=' + encodeURIComponent(S.heroTitle));
@@ -213,70 +213,32 @@
     fl.appendChild(d);
   });
 
-  /* --- Отзывы с Профи.ру --- */
+  /* --- Отзывы: агрегированные данные и ссылка на площадку.
+       Тексты отзывов и имена клиентов с Профи.ру не подгружаются. --- */
   set('#reviewsTitle', S.reviewsTitle);
   set('#reviewsSub', S.reviewsSub);
+  set('#reviewsNote', S.reviewsNote);
 
   function fmtCount(n) {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
-  function renderReviews(items, count, rating) {
-    var grid = $('#reviewsGrid');
-    grid.innerHTML = '';
-    (items || []).forEach(function (r) {
-      var card = el('article', 'review-card');
-      var top = el('div', 'review-top');
-      var left = el('div');
-      left.appendChild(el('div', 'review-author', esc(r.author || 'Клиент')));
-      left.appendChild(el('div', 'review-date', esc(r.date || '')));
-      top.appendChild(left);
-      top.appendChild(el('div', 'review-mark', '★★★★★'));
-      card.appendChild(top);
-      card.appendChild(el('p', 'review-text', esc(r.text || '')));
-      if (r.service) card.appendChild(el('div', 'review-service', esc(r.service)));
-      grid.appendChild(card);
-    });
-    if (count) {
-      set('#reviewsCount', fmtCount(count) + ' отзывов');
-      var link = $('#reviewsLink');
-      if (link) link.textContent = 'Все ' + fmtCount(count) + ' отзывов на Профи.ру';
-    }
-    if (rating) set('#reviewsScore', String(rating).replace('.', ','));
-    set('#reviewsStars', '★★★★★');
-  }
+  var rc = $('#reviewsCount');
+  if (rc && S.reviewsCount) rc.textContent = fmtCount(S.reviewsCount) + ' отзывов';
+  var rs = $('#reviewsScore');
+  if (rs && S.reviewsRating) rs.textContent = S.reviewsRating;
+  set('#reviewsStars', '★★★★★');
 
   var rl = $('#reviewsLink');
-  if (rl && S.reviewsLink) { rl.href = S.reviewsLink; rl.textContent = S.reviewsLinkText || 'Все отзывы на Профи.ру'; }
-
-  renderReviews(S.reviewsFallback, 140, 5);
-
-  if (S.reviewsApi) {
-    fetch(S.reviewsApi, { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) {
-        if (!d || !d.reviews || !d.reviews.length) return;
-        renderReviews(d.reviews, d.count, d.rating);
-        if (d.count) {
-          var at = $('#aboutText');
-          if (at) at.textContent = at.textContent.replace(/\{REVIEWS\}/g, fmtCount(d.count)).replace(/более\s+(\d+)\s+отзывов/i, 'более ' + fmtCount(d.count) + ' отзывов');
-          var ld = document.getElementById('ld-business');
-          if (ld) {
-            try {
-              var data = JSON.parse(ld.textContent);
-              var node = null;
-              (data['@graph'] || []).forEach(function (n) { if (n['@type'] === 'AutomotiveBusiness') node = n; });
-              if (node && node.aggregateRating) node.aggregateRating.reviewCount = String(d.count);
-              ld.textContent = JSON.stringify(data);
-            } catch (e) {}
-          }
-        }
-        if (d.fetched_at) {
-          var when = new Date(d.fetched_at);
-          var txt = 'Обновлено ' + when.toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
-          set('#reviewsUpdated', txt);
-        }
-      })
-      .catch(function () {});
+  if (rl && S.reviewsLink) {
+    rl.href = S.reviewsLink;
+    rl.textContent = S.reviewsLinkText || 'Все отзывы на Профи.ру';
+    rl.setAttribute('rel', 'nofollow sponsored noopener');
+  }
+  var cta = $('#reviewsCta');
+  if (cta && S.reviewsCtaLink) {
+    cta.href = S.reviewsCtaLink;
+    if (S.reviewsCta) cta.textContent = S.reviewsCta;
+    cta.setAttribute('rel', 'noopener');
   }
 
   /* --- Галерея --- */

@@ -118,13 +118,6 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Замена масла и фильтров на выезде", "serviceType": "Ремонт авто" } }
         ]
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "bestRating": "5",
-        "worstRating": "1",
-        "reviewCount": "143"
-      },
       "sameAs": ["https://profi.ru/profile/AfoninMV14/share"]
     },
     {
@@ -197,18 +190,6 @@
   ]
 }
 </script>
-<script type="application/ld+json" id="ld-reviews">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "itemListElement": [
-    { "@type": "Review", "itemReviewed": { "@id": "https://xn--80aesajwhicohj4j.xn--p1ai/#business" }, "author": { "@type": "Person", "name": "Светлана" }, "datePublished": "2026-10-23", "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "Отличный специалист, заранее сообщил о времени приезда, приехал минута в минуту, все оперативно и качественно сделал. Рекомендую!" },
-    { "@type": "Review", "itemReviewed": { "@id": "https://xn--80aesajwhicohj4j.xn--p1ai/#business" }, "author": { "@type": "Person", "name": "Андрей" }, "datePublished": "2026-10-17", "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "Приятный в общении, помог с выбором аккумулятора, аккуратно и быстро произвел замену." },
-    { "@type": "Review", "itemReviewed": { "@id": "https://xn--80aesajwhicohj4j.xn--p1ai/#business" }, "author": { "@type": "Person", "name": "Данил" }, "datePublished": "2026-10-14", "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "Специалист написал, что готов быть через 20 минут, и реально так и приехал. Оказалось, что нужна замена аккумулятора, сразу договорились, выбрали, съездил за ним, сдал старый. Проблема была решена в течение часа, несмотря на ночное время." },
-    { "@type": "Review", "itemReviewed": { "@id": "https://xn--80aesajwhicohj4j.xn--p1ai/#business" }, "author": { "@type": "Person", "name": "Татьяна" }, "datePublished": "2026-10-20", "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "Четкая коммуникация по стоимости и вариантам, все быстро и качественно." }
-  ]
-}
-</script>
 </head>
 <body>
 
@@ -245,7 +226,7 @@
         <div class="hero-actions">
           <a class="btn btn-solid btn-lg" href="#form">Оставить заявку</a>
           <button type="button" class="btn btn-line btn-lg btn-call" id="heroPhone" data-call><svg class="call-ico-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg><span id="heroPhoneNum">Позвонить</span></button>
-          <a class="btn btn-line btn-lg" id="profiBtnTop" target="_blank" rel="noopener">Профиль на Профи.ру</a>
+          <a class="btn btn-line btn-lg" id="profiBtnTop" target="_blank" rel="nofollow sponsored noopener">Профиль на Профи.ру</a>
         </div>
         <div class="hero-share">
           <span>Поделиться:</span>
@@ -385,16 +366,13 @@
           </div>
         </div>
       </div>
-      <div class="carousel" id="reviewsCarousel">
-        <div class="carousel-track" id="reviewsGrid">__REVIEWS_STATIC__</div>
-        <button class="carousel-btn carousel-prev" type="button" data-target="reviewsGrid" aria-label="Предыдущий отзыв">&#8249;</button>
-        <button class="carousel-btn carousel-next" type="button" data-target="reviewsGrid" aria-label="Следующий отзыв">&#8250;</button>
+      <div class="reviews-source">
+        <p class="reviews-note" id="reviewsNote">__REVIEWS_NOTE__</p>
+        <div class="reviews-actions">
+          <a class="btn btn-line" id="reviewsLink" target="_blank" rel="nofollow sponsored noopener">__REVIEWS_LINK_TEXT__</a>
+          <a class="btn btn-line" id="reviewsCta" target="_blank" rel="noopener">__REVIEWS_CTA__</a>
+        </div>
       </div>
-      <p class="swipe-hint"><span class="swipe-hint-icon">&#8596;</span> Листайте отзывы свайпом в сторону</p>
-      <p class="reviews-foot">
-        <a id="reviewsLink" target="_blank" rel="noopener"></a>
-        <span class="reviews-updated" id="reviewsUpdated"></span>
-      </p>
     </div>
   </section>
 
@@ -450,7 +428,7 @@
       <div class="form-side">
         <h2 class="sec-title" id="formTitle">__FORM_TITLE__</h2>
         <p class="form-note" id="formNote">__FORM_NOTE__</p>
-        <p class="form-alt" id="formAlt">Или загляните в <a id="profiLink2" target="_blank" rel="noopener">профиль на Профи.ру</a> — там же можно заказать выезд напрямую.</p>
+        <p class="form-alt" id="formAlt">Или загляните в <a id="profiLink2" target="_blank" rel="nofollow sponsored noopener">профиль на Профи.ру</a> — там же можно заказать выезд напрямую.</p>
         <p class="form-alt">Быстрее написать напрямую:</p>
         <div class="msg-btns msg-btns-form">
           <a class="msg-btn" data-msg="telegram" href="https://t.me/mak84sim" target="_blank" rel="noopener" title="Telegram" aria-label="Написать в Telegram">
@@ -463,7 +441,7 @@
             <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A9.9 9.9 0 1 0 12 2zm5.3 13.9c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.5-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5-.3.3c-.1.1-.2.3 0 .5.2.4.8 1.3 1.6 2 1.1 1 2 1.3 2.3 1.4.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l2 1c.2.1.4.2.4.3.1.1.1.6-.1 1.2z"/></svg>
             <span>WhatsApp</span></a>
         </div>
-        <p class="form-alt"><a class="btn btn-line" id="orderBtn" target="_blank" rel="noopener">Заказать выезд на Профи.ру</a></p>
+        <p class="form-alt"><a class="btn btn-line" id="orderBtn" target="_blank" rel="nofollow sponsored noopener">Заказать выезд на Профи.ру</a></p>
         <p class="form-call" id="formCall"></p>
       </div>
       <form id="requestForm" class="req-form" action="https://lead-relay-pomoshch.spru.run/lead?key=c8f2a91d47b6" method="POST">
@@ -504,7 +482,7 @@
       <span id="footNote">__FOOT_NOTE__</span>
     </div>
     <nav class="foot-nav">
-      <a id="profiLink3" target="_blank" rel="noopener">Профиль на Профи.ру</a>
+      <a id="profiLink3" target="_blank" rel="nofollow sponsored noopener">Профиль на Профи.ру</a>
       <a href="https://t.me/mak84sim" target="_blank" rel="noopener">Telegram</a>
       <button type="button" id="footPhone" data-call hidden></button>
       <a href="contacts.html">Контакты</a>

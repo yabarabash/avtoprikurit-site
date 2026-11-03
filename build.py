@@ -71,14 +71,7 @@ LEGALFORM = S.get("legalForm", "")
 SCHEDULE = S.get("schedule", "")
 
 
-# --- Статические отзывы (для поисковиков) ---
-REVIEWS = "".join(
-    '<article class="review-card"><div class="review-top"><div><div class="review-author">%s</div>'
-    '<div class="review-date">%s</div></div><div class="review-mark">★★★★★</div></div>'
-    '<p class="review-text">%s</p><div class="review-service">%s</div></article>'
-    % (esc(r.get("author", "")), esc(r.get("date", "")), esc(r.get("text", "")), esc(r.get("service", "")))
-    for r in S.get("reviewsFallback", []))
-
+# --- Отзывы: только агрегированные данные (тексты и имена клиентов не копируются) ---
 REVIEW_COUNT = S.get("reviewsCount", 143)
 
 MAP = {
@@ -107,7 +100,9 @@ MAP = {
     "__FAQ_TITLE__": esc(S.get("faqTitle", "")),
     "__REVIEWS_TITLE__": esc(S.get("reviewsTitle", "")),
     "__REVIEWS_SUB__": esc(S.get("reviewsSub", "")),
-    "__REVIEWS_STATIC__": REVIEWS,
+    "__REVIEWS_NOTE__": esc(S.get("reviewsNote", "")),
+    "__REVIEWS_LINK_TEXT__": esc(S.get("reviewsLinkText", "")),
+    "__REVIEWS_CTA__": esc(S.get("reviewsCta", "")),
     "__FOOT_NAME__": esc(S.get("role", "")),
     "__FOOT_NOTE__": esc(S.get("footerNote", "")),
     "__BRAND_NAME__": esc(S.get("brandName", "")),
@@ -145,13 +140,19 @@ def svc_faq(pg):
                    % (esc(f["q"]), esc(f["a"])) for f in pg["faq"])
 
 def svc_reviews():
-    items = (S.get("reviewsFallback") or [])[:4]
-    return "".join(
-        '<article class="review-card"><div class="review-top"><div><div class="review-author">%s</div>'
-        '<div class="review-date">%s</div></div><div class="review-mark">★★★★★</div></div>'
-        '<p class="review-text">%s</p><div class="review-service">%s</div></article>'
-        % (esc(r.get("author", "")), esc(r.get("date", "")), esc(r.get("text", "")), esc(r.get("service", "")))
-        for r in items)
+    """Агрегированные данные: без текстов отзывов и имён клиентов."""
+    return (
+        '<p class="reviews-note">%s</p>'
+        '<div class="reviews-actions">'
+        '<a class="btn btn-line" href="%s" target="_blank" rel="nofollow sponsored noopener">%s</a>'
+        '<a class="btn btn-line" href="%s" target="_blank" rel="noopener">%s</a>'
+        '</div>'
+        % (esc(S.get("reviewsNote", "")),
+           esc(S.get("reviewsLink", "")),
+           esc(S.get("reviewsLinkText", "")),
+           esc(S.get("reviewsCtaLink", "")),
+           esc(S.get("reviewsCta", "")))
+    )
 
 def svc_links(pg):
     out = []
@@ -182,13 +183,6 @@ def svc_ld(pg):
                 "serviceUrl": SITEURL + "/#form",
                 "availableLanguage": {"@type": "Language", "name": "Русский"},
             },
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "1",
-                "reviewCount": str(REVIEW_COUNT),
-            },
         },
         {
             "@type": "FAQPage",
@@ -197,18 +191,6 @@ def svc_ld(pg):
                 {"@type": "Question", "name": f["q"],
                  "acceptedAnswer": {"@type": "Answer", "text": f["a"]}}
                 for f in pg["faq"]
-            ],
-        },
-        {
-            "@type": "ItemList",
-            "name": "Отзывы клиентов",
-            "itemListElement": [
-                {"@type": "Review",
-                 "itemReviewed": {"@id": SITEURL + "/#business"},
-                 "author": {"@type": "Person", "name": r.get("author", "Клиент")},
-                 "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
-                 "reviewBody": r.get("text", "")}
-                for r in (S.get("reviewsFallback") or [])[:4]
             ],
         },
         {
