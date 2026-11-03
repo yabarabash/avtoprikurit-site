@@ -72,7 +72,7 @@ SCHEDULE = S.get("schedule", "")
 
 
 # --- Отзывы: только агрегированные данные (тексты и имена клиентов не копируются) ---
-REVIEW_COUNT = S.get("reviewsCount", 143)
+REVIEW_COUNT = S.get("reviewsCount", 150)
 
 MAP = {
     "__BADGES__": BADGES,
@@ -101,6 +101,8 @@ MAP = {
     "__REVIEWS_TITLE__": esc(S.get("reviewsTitle", "")),
     "__REVIEWS_SUB__": esc(S.get("reviewsSub", "")),
     "__REVIEWS_NOTE__": esc(S.get("reviewsNote", "")),
+    "__REVIEWS_DISCLAIMER__": esc(S.get("reviewsDisclaimer", "")),
+    "__REVIEW_COUNT__": str(REVIEW_COUNT),
     "__REVIEWS_LINK_TEXT__": esc(S.get("reviewsLinkText", "")),
     "__REVIEWS_CTA__": esc(S.get("reviewsCta", "")),
     "__FOOT_NAME__": esc(S.get("role", "")),
@@ -143,11 +145,13 @@ def svc_reviews():
     """Агрегированные данные: без текстов отзывов и имён клиентов."""
     return (
         '<p class="reviews-note">%s</p>'
+        '<p class="reviews-disclaimer">%s</p>'
         '<div class="reviews-actions">'
         '<a class="btn btn-line" href="%s" target="_blank" rel="nofollow sponsored noopener">%s</a>'
         '<a class="btn btn-line" href="%s" target="_blank" rel="noopener">%s</a>'
         '</div>'
         % (esc(S.get("reviewsNote", "")),
+           esc(S.get("reviewsDisclaimer", "")),
            esc(S.get("reviewsLink", "")),
            esc(S.get("reviewsLinkText", "")),
            esc(S.get("reviewsCtaLink", "")),
@@ -234,6 +238,7 @@ for pg in pages:
             .replace("__PAGE_BODY__", svc_body(pg))
             .replace("__PAGE_FAQ__", svc_faq(pg))
             .replace("__PAGE_REVIEWS__", svc_reviews())
+            .replace("__REVIEW_COUNT__", str(REVIEW_COUNT))
             .replace("__PAGE_LINKS__", svc_links(pg))
             .replace("__PAGE_LD__", svc_ld(pg)))
     d = os.path.join(ROOT, pg["slug"])

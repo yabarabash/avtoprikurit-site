@@ -19,7 +19,7 @@
   set('#heroTitle', S.heroTitle);
   set('#heroLead', S.heroLead);
   set('#aboutTitle', S.aboutTitle);
-  set('#aboutText', (S.aboutText || '').replace(/\{REVIEWS\}/g, String(S.reviewsCount || 143)));
+  set('#aboutText', (S.aboutText || '').replace(/\{REVIEWS\}/g, String(S.reviewsCount || 150)));
   set('#formTitle', S.formTitle);
   set('#formNote', S.formNote);
   set('#priceNote', S.priceNote);
@@ -218,6 +218,7 @@
   set('#reviewsTitle', S.reviewsTitle);
   set('#reviewsSub', S.reviewsSub);
   set('#reviewsNote', S.reviewsNote);
+  set('#reviewsDisclaimer', S.reviewsDisclaimer);
 
   function fmtCount(n) {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');

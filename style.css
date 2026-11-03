@@ -378,7 +378,8 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.18; let
 .reviews-foot a:hover { color: var(--accent); }
 .reviews-updated { font-size: 13px; color: var(--muted); }
 .reviews-source { border: 1px solid var(--border); border-radius: 16px; padding: 24px 26px; background: var(--surface); }
-.reviews-note { font-size: 15px; line-height: 1.6; color: var(--fg); margin: 0 0 18px; }
+.reviews-note { font-size: 15px; line-height: 1.6; color: var(--fg); margin: 0 0 10px; }
+.reviews-disclaimer { font-size: 13px; line-height: 1.5; color: var(--muted); margin: 0 0 18px; }
 .reviews-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 .reviews-actions .btn { color: var(--fg); }
 
