@@ -1,0 +1,15 @@
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Отправить IndexNow (Яндекс, Bing)
+        env:
+          INDEXNOW_KEY: c5e7da3731eb12a543dfdea1a951e6c5
+        run: python3 indexnow.py

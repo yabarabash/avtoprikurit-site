@@ -252,10 +252,13 @@ for pg in pages:
 
 MAP["__SVC_LINKS__"] = "".join(SVC_LINKS_INDEX)
 
+TODAY = __import__("datetime").date.today().isoformat()
+
 # sitemap с посадочными страницами
 sm = ['<?xml version="1.0" encoding="UTF-8"?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-def u(loc, prio, changefreq="weekly", lastmod="2026-10-27"):
+def u(loc, prio, changefreq="weekly", lastmod=None):
+    lastmod = lastmod or TODAY
     sm.extend(["  <url>", "    <loc>%s</loc>" % loc, "    <lastmod>%s</lastmod>" % lastmod,
                "    <changefreq>%s</changefreq>" % changefreq, "    <priority>%s</priority>" % prio, "  </url>"])
 u(SITEURL + "/", "1.0")
