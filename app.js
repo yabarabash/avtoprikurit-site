@@ -421,8 +421,16 @@
     if (settingsBtn) settingsBtn.hidden = false;
   }
 
-  var consent = read();
-  if (consent === 'yes') {
+  /* Роботам Яндекса и Google счётчик нужен всегда: по нему вебмастер
+     подтверждает, что сайт живой, и ускоряет обход. Согласие на cookie
+     спрашиваем только у живых посетителей. */
+  var ua = navigator.userAgent || '';
+  var looksBrowser = /(Chrome|Safari|Firefox|Edge|OPR|Android|iPhone|Macintosh)/i.test(ua);
+  var isBot = !looksBrowser && /(Yandex|Googlebot|Bingbot|bot|crawler|spider|curl|wget|python-requests)/i.test(ua);
+  if (isBot) {
+    loadMetrika();
+    hideBar();
+  } else if (consent === 'yes') {
     loadMetrika();
     hideBar();
   } else if (consent === 'no') {

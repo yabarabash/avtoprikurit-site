@@ -3,7 +3,7 @@
 import json, os, sys, urllib.request
 
 SITE = os.environ.get("SITE", "https://xn--80aesajwhicohj4j.xn--p1ai")
-KEY = os.environ.get("INDEXNOW_KEY", "c5e7da3731eb12a543dfdea1a951e6c5")
+KEY = os.environ.get("INDEXNOW_KEY", "a348b8e06666758c659d040fa5a440c6")
 UA = "Mozilla/5.0 (compatible; IndexNowBot/1.0)"
 
 req = urllib.request.Request(SITE + "/sitemap.xml", headers={"User-Agent": UA})
