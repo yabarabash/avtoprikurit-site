@@ -269,10 +269,44 @@
   /* --- Форма --- */
   var form = $('#requestForm');
   var status = $('#formStatus');
+  /* Метка времени загрузки формы: по ней сервер отличает человека от бота. */
+  var tsField = $('#f-ts');
+  if (tsField) tsField.value = String(Date.now());
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    status.textContent = 'Отправляю…';
     status.className = 'form-status';
+
+    /* Ловушка для ботов заполнена — показываем успех, но ничего не отправляем. */
+    var hp = $('#f-hp');
+    if (hp && hp.value) {
+      status.textContent = 'Заявка отправлена. Напишу вам в ближайшее время.';
+      status.className = 'form-status ok';
+      form.reset();
+      return;
+    }
+
+    var name = ($('#f-name') && $('#f-name').value || '').trim();
+    var tel = ($('#f-phone') && $('#f-phone').value || '').trim();
+    var what = ($('#f-what') && $('#f-what').value || '').trim();
+    var digits = tel.replace(/\D/g, '');
+    if (name.length < 2) {
+      status.textContent = 'Напишите, как к вам обращаться.';
+      status.className = 'form-status err';
+      return;
+    }
+    if (digits.length < 10) {
+      status.textContent = 'Проверьте телефон: номер нужен полностью.';
+      status.className = 'form-status err';
+      return;
+    }
+    if (what.length < 5) {
+      status.textContent = 'Опишите коротко, что случилось.';
+      status.className = 'form-status err';
+      return;
+    }
+
+    status.textContent = 'Отправляю…';
     var body = new URLSearchParams(new FormData(form)).toString();
     var done = function (ok) {
       if (!ok) return;

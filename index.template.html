@@ -445,6 +445,12 @@
         <p class="form-call" id="formCall"></p>
       </div>
       <form id="requestForm" class="req-form" action="https://lead-relay-pomoshch.spru.run/lead?key=c8f2a91d47b6" method="POST">
+        <!-- ловушка для ботов: поле скрыто от людей, но заполняется автоматами -->
+        <div class="hp-wrap" aria-hidden="true">
+          <label for="f-hp">Не заполняйте это поле</label>
+          <input id="f-hp" type="text" name="hp" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="ts" id="f-ts" value="">
         <div class="field">
           <label for="f-name">Как к вам обращаться</label>
           <input id="f-name" type="text" name="Имя" autocomplete="name" placeholder="Имя" required>

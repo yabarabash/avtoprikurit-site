@@ -505,3 +505,6 @@ button { font-family: inherit; }
 .contacts-item .msg-btn span,
 .form-side .msg-btn,
 .form-side .msg-btn span { color: var(--fg) !important; }
+
+/* Ловушка для ботов: спрятана от людей, но видна автозаполнению */
+.hp-wrap{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0}
