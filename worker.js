@@ -11,29 +11,57 @@ const SECURITY_HEADERS = {
   "Cross-Origin-Opener-Policy": "same-origin",
 };
 
-const TRACK_SCRIPT = [
-  // Счётчик Метрики подключаем для всех посетителей (решение владельца
-  // сайта): считаем согласие выполненным, cookie-баннер не показываем.
-  "(function(){window.consent='yes';",
-  "function add(){var f=document.getElementById('requestForm');if(!f)return;var q=new URLSearchParams(location.search);",
-  "var vals={ref:document.referrer||'',page:location.pathname+location.hash,utm_source:q.get('utm_source')||'',",
-  "utm_medium:q.get('utm_medium')||'',utm_campaign:q.get('utm_campaign')||'',utm_term:q.get('utm_term')||'',",
-  "utm_content:q.get('utm_content')||''};",
-  "Object.keys(vals).forEach(function(k){if(!vals[k])return;if(f.querySelector('[name='+k+']'))return;",
-  "var i=document.createElement('input');i.type='hidden';i.name=k;i.value=vals[k];f.appendChild(i);});}",
-  // Счётчик Метрики грузим на всех страницах, включая посадочные (там нет app.js).
-  "function loadYM(){if(window.__ymLoaded)return;window.__ymLoaded=true;",
-  "(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){m[i].a=m[i].a||[]).push(arguments);};",
-  "m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return;}",
-  "k=e.createElement(t);a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a);",
-  "})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113737965','ym');",
-  "window.ym(113737965,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});}",
-  "function hideCookie(){var b=document.getElementById('noticeBar');if(b)".hidden=true;",
-  "var s=document.getElementById('noticeSettings');if(s)s.hidden=true;}",
-  "function boot(){add();hideCookie();loadYM();}",
-  "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',boot);}else{boot();}",
-  "setTimeout(loadYM,0);setTimeout(hideCookie,300);setTimeout(hideCookie,1500);}})();",
-].join("");
+const TRACK_SCRIPT = `
+(function () {
+  window.consent = 'yes';
+  function addFields() {
+    var f = document.getElementById('requestForm');
+    if (!f) return;
+    var q = new URLSearchParams(location.search);
+    var vals = {
+      ref: document.referrer || '',
+      page: location.pathname + location.hash,
+      utm_source: q.get('utm_source') || '',
+      utm_medium: q.get('utm_medium') || '',
+      utm_campaign: q.get('utm_campaign') || '',
+      utm_term: q.get('utm_term') || '',
+      utm_content: q.get('utm_content') || ''
+    };
+    Object.keys(vals).forEach(function (k) {
+      if (!vals[k]) return;
+      if (f.querySelector('[name="' + k + '"]')) return;
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = k; i.value = vals[k];
+      f.appendChild(i);
+    });
+  }
+  function loadYM() {
+    if (window.__ymLoaded) return;
+    window.__ymLoaded = true;
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) return; }
+      k = e.createElement(t); a = e.getElementsByTagName(t)[0];
+      k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113737965', 'ym');
+    window.ym(113737965, 'init', {
+      clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true
+    });
+  }
+  function hideCookie() {
+    var b = document.getElementById('noticeBar'); if (b) b.hidden = true;
+    var s = document.getElementById('noticeSettings'); if (s) s.hidden = true;
+  }
+  function boot() { addFields(); hideCookie(); loadYM(); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else { boot(); }
+  setTimeout(loadYM, 0);
+  setTimeout(hideCookie, 300);
+  setTimeout(hideCookie, 1500);
+})();
+`.trim();
 
 const SERVICE_PAGES = [
   "prikurit-avto", "shinomontazh", "zamen-akb",
