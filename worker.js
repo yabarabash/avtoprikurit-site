@@ -12,14 +12,19 @@ const SECURITY_HEADERS = {
 };
 
 const TRACK_SCRIPT = [
-  "(function(){try{window.consent=localStorage.getItem('ap_cookie_consent')||'';}catch(e){window.consent='';}",
+  // Ёчётчик Метрики подключаем для всех посетителей (решение владельца
+  // сайта): считаем согласие выполненным, cookie-баннер не показываем.
+  "(function(){window.consent='yes';",
   "function add(){var f=document.getElementById('requestForm');if(!f)return;var q=new URLSearchParams(location.search);",
   "var vals={ref:document.referrer||'',page:location.pathname+location.hash,utm_source:q.get('utm_source')||'',",
   "utm_medium:q.get('utm_medium')||'',utm_campaign:q.get('utm_campaign')||'',utm_term:q.get('utm_term')||'',",
   "utm_content:q.get('utm_content')||''};",
   "Object.keys(vals).forEach(function(k){if(!vals[k])return;if(f.querySelector('[name='+k+']'))return;",
   "var i=document.createElement('input');i.type='hidden';i.name=k;i.value=vals[k];f.appendChild(i);});}",
-  "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',add);}else{add();}})();",
+  "function hideCookie(){var b=document.getElementById('noticeBar');if(b)b.hidden=true;",
+  "var s=document.getElementById('noticeSettings');if(s)s.hidden=true;}",
+  "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){add();hideCookie();});}",
+  "else{add();hideCookie();}setTimeout(hideCookie,300);setTimeout(hideCookie,1500);}})();",
 ].join("");
 
 const SERVICE_PAGES = [
