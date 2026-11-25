@@ -12,7 +12,7 @@ const SECURITY_HEADERS = {
 };
 
 const TRACK_SCRIPT = [
-  // Ёчётчик Метрики подключаем для всех посетителей (решение владельца
+  // Счётчик Метрики подключаем для всех посетителей (решение владельца
   // сайта): считаем согласие выполненным, cookie-баннер не показываем.
   "(function(){window.consent='yes';",
   "function add(){var f=document.getElementById('requestForm');if(!f)return;var q=new URLSearchParams(location.search);",
@@ -21,10 +21,18 @@ const TRACK_SCRIPT = [
   "utm_content:q.get('utm_content')||''};",
   "Object.keys(vals).forEach(function(k){if(!vals[k])return;if(f.querySelector('[name='+k+']'))return;",
   "var i=document.createElement('input');i.type='hidden';i.name=k;i.value=vals[k];f.appendChild(i);});}",
-  "function hideCookie(){var b=document.getElementById('noticeBar');if(b)b.hidden=true;",
+  // Счётчик Метрики грузим на всех страницах, включая посадочные (там нет app.js).
+  "function loadYM(){if(window.__ymLoaded)return;window.__ymLoaded=true;",
+  "(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){m[i].a=m[i].a||[]).push(arguments);};",
+  "m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return;}",
+  "k=e.createElement(t);a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a);",
+  "})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=113737965','ym');",
+  "window.ym(113737965,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});}",
+  "function hideCookie(){var b=document.getElementById('noticeBar');if(b)".hidden=true;",
   "var s=document.getElementById('noticeSettings');if(s)s.hidden=true;}",
-  "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){add();hideCookie();});}",
-  "else{add();hideCookie();}setTimeout(hideCookie,300);setTimeout(hideCookie,1500);}})();",
+  "function boot(){add();hideCookie();loadYM();}",
+  "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',boot);}else{boot();}",
+  "setTimeout(loadYM,0);setTimeout(hideCookie,300);setTimeout(hideCookie,1500);}})();",
 ].join("");
 
 const SERVICE_PAGES = [
